@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.local
+.env.*.local
+
+# React build (يُعاد بناؤه بـ npm run build)
+frontend/build/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# TensorFlow / Jupyter checkpoints (اختياري — أزل التعليق إذا أردت استثناء النموذج)
+# backend/model_ia/model.h5

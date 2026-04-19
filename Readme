@@ -1,0 +1,96 @@
+![Status](https://img.shields.io/badge/status-active-success)
+![AI](https://img.shields.io/badge/AI-CNN-blue)
+![Backend](https://img.shields.io/badge/FastAPI-backend-green)
+![Database](https://img.shields.io/badge/MySQL%20%2B%20MongoDB-orange)
+![Docker](https://img.shields.io/badge/docker-containerized-blue)
+
+🧠 BrainScan – AI Medical Diagnostic Platform
+
+
+🚀 Overview
+
+BrainScan is a Full-Stack AI-powered healthcare platform that analyzes brain MRI scans using Deep Learning (CNN) to assist in early detection of neurological diseases.
+
+The platform provides:
+
+AI-based MRI diagnosis
+Automated medical report generation
+Doctor–patient communication system
+Secure hybrid data architecture
+⚙️ Tech Stack
+Frontend
+React.js
+SCSS
+Framer Motion
+Lucide Icons
+Backend
+FastAPI (Python)
+REST API
+AI inference (CNN model integration)
+Databases
+MySQL (structured data: users, appointments)
+MongoDB (MRI scans, reports, chat data)
+DevOps
+Docker
+Docker Compose
+Microservices architecture
+🧠 AI System
+Convolutional Neural Network (CNN)
+MRI brain scan classification
+Abnormality detection
+Automatic medical report generation (PDF)
+Real-time inference via FastAPI
+🏗️ System Architecture
+Frontend (React)
+      ↓
+Backend (FastAPI)
+      ↓
+ ┌──────────────┬──────────────┬──────────────┐
+ │              │              │              │
+MySQL        MongoDB         AI Model (CNN)
+Users/RDV    MRI/Reports     Diagnosis Engine
+✨ Features
+👨‍⚕️ Doctor Panel
+Upload MRI scans
+AI diagnosis results
+Generate medical reports
+Manage appointments
+🧑 Patient Panel
+View medical reports
+Book appointments
+Track diagnosis history
+🛠️ Admin Panel
+Manage doctors & patients
+Approve doctor registrations
+Control specialties
+💬 Communication System
+Real-time chat (Doctor ↔ Patient)
+Post-diagnosis follow-up
+AI medical chatbot assistant
+🔐 Security
+Role-based access control (Admin / Doctor / Patient)
+Doctor pre-registration code system
+Secure medical data storage
+🐳 Run with Docker
+1. Clone repository
+git clone https://github.com/FahemAoudia/BrainScan-AI-Medical-Diagnostic-Platform.git
+cd BrainScan-AI-Medical-Diagnostic-Platform
+2. Start project
+docker-compose up --build
+📦 Services
+Backend
+Port: 5000
+Depends on MySQL + MongoDB
+Frontend
+Port: 3000
+MySQL
+Database: brainscandb
+MongoDB
+Stores MRI scans & reports
+🧠 Project Vision
+
+BrainScan aims to bring AI into healthcare by improving MRI analysis accuracy and reducing diagnostic time through automation and intelligent systems.
+
+👨‍💻 Author
+
+Built by Aoudia fahem

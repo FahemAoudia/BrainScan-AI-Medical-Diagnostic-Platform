@@ -1,0 +1,119 @@
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    padding-bottom: 900px; 
+}
+
+.sidebar {
+    height: 100vh;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 2cm;
+
+    &.open {
+        width: 250px;
+    }
+
+    &.closed {
+        width: 80px;
+    }
+
+    .menu-icon {
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            &.logout {
+                margin-top: auto;
+            }
+        }
+    }
+}
+
+.panel-container {
+    flex: 1;
+    padding: 2cm;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 2cm;
+        padding: 2cm;
+
+
+
+
+    .panel-header {
+        margin-bottom: 20px;
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+        }
+
+    }
+
+    .panel-content {
+        p {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .ai-section {
+            margin-top: 20px;
+
+            h3 {
+                color: #fff;
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            input[type="file"] {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .action-button {
+                background: #ff5722;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background 0.3s ease;
+
+                &:hover {
+                    background: #e64a19;
+                }
+
+                &:disabled {
+                    background: #ccc;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
