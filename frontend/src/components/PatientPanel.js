@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -48,7 +49,7 @@ const PatientPanel = () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:5000/api/reports/mysql/${patientId}`);
+      const response = await fetch(`${API_BASE_URL}/api/reports/mysql/${patientId}`);
       const data = await response.json();
   
       if (Array.isArray(data)) {
@@ -106,7 +107,7 @@ const handleUpdateAppointment = async () => {
   };
 
   try {
-      const response = await fetch(`http://localhost:5000/api/appointments/${editAppointmentId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/appointments/${editAppointmentId}`, {
           method: "PUT",
           headers: {
               "Content-Type": "application/json",
@@ -146,7 +147,7 @@ const handleUpdateAppointment = async () => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/users/me", {
+      const response = await fetch(`${API_BASE_URL}/api/users/me`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -171,7 +172,7 @@ const handleUpdateAppointment = async () => {
 
   const fetchDoctors = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/appointments/doctors");
+      const response = await fetch(`${API_BASE_URL}/api/appointments/doctors`);
       let data = await response.json();
 
       console.log("📢 Données des médecins récupérées:", data);
@@ -195,7 +196,7 @@ const handleUpdateAppointment = async () => {
     }
 
     try {
-        const response = await fetch(`http://localhost:5000/api/appointments/doctor/${doctorId}/patient/${patientId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/appointments/doctor/${doctorId}/patient/${patientId}`, {
             method: "GET",
         });
 
@@ -232,7 +233,7 @@ const bookAppointment = async () => {
   const appointment_time = selectedTime;
 
   const token = localStorage.getItem("token");
-  const response = await fetch("http://localhost:5000/api/users/me", {
+  const response = await fetch(`${API_BASE_URL}/api/users/me`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
   });
@@ -251,7 +252,7 @@ const bookAppointment = async () => {
   console.log("📨 Données envoyées au serveur:", appointmentData);
 
   try {
-      const response = await fetch("http://localhost:5000/api/appointments/book", {
+      const response = await fetch(`${API_BASE_URL}/api/appointments/book`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(appointmentData),
@@ -274,7 +275,7 @@ const bookAppointment = async () => {
 
   const deleteAppointment = async (id) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/appointments/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/appointments/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -379,7 +380,7 @@ const bookAppointment = async () => {
               <td>{report.diagnosis}</td>
               <td>
   <motion.button
-    onClick={() => window.open(`http://127.0.0.1:5000/${report.report_url.replace(/^\//, '')}`, "_blank")}
+    onClick={() => window.open(`${API_BASE_URL}/${report.report_url.replace(/^\//, '')}`, "_blank")}
     className="confirm"
     whileHover={{ scale: 1.05 }}
   >

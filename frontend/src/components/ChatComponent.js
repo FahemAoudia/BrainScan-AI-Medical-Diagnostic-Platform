@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config";
 import React, { useState, useEffect, useRef } from "react";
 
 const ChatComponent = ({ userId, recipientId, chatId, recipientName, senderType, closeChat }) => {
@@ -12,7 +13,7 @@ const ChatComponent = ({ userId, recipientId, chatId, recipientName, senderType,
       if (!chatId) return;
 
       try {
-        const response = await fetch(`http://localhost:5000/api/chat/${chatId}`);
+        const response = await fetch(`${API_BASE_URL}/api/chat/${chatId}`);
         const data = await response.json();
 
         if (Array.isArray(data)) {
@@ -88,7 +89,7 @@ const ChatComponent = ({ userId, recipientId, chatId, recipientName, senderType,
         updateMessages(newMessage);
         setMessage("");
 
-        const response = await fetch("http://localhost:5000/api/chat/send", {
+        const response = await fetch(`${API_BASE_URL}/api/chat/send`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newMessage)

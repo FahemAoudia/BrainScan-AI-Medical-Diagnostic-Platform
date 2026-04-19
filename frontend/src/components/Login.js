@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config";
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // ✅ Utilisation de la navigation entre les pages
 import '../Login.scss';
@@ -21,7 +22,7 @@ const Login = ({ formType, closeForm }) => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/api/auth/register", {
+            const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -51,7 +52,7 @@ const Login = ({ formType, closeForm }) => {
         console.log("🔍 Tentative de connexion...");
 
         try {
-            const response = await fetch("http://localhost:5000/api/auth/login", {
+            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams({

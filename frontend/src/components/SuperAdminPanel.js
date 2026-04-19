@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -33,7 +34,7 @@ const SuperAdminPanel = () => {
 
   const fetchDoctors = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/doctors");
+      const response = await fetch(`${API_BASE_URL}/api/admin/doctors`);
       const data = await response.json();
       setDoctors(data);
     } catch (error) {
@@ -43,7 +44,7 @@ const SuperAdminPanel = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/users");
+      const response = await fetch(`${API_BASE_URL}/api/admin/users`);
       const data = await response.json();
       setUsers(data);
     } catch (error) {
@@ -58,7 +59,7 @@ const SuperAdminPanel = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/doctors", {
+      const response = await fetch(`${API_BASE_URL}/api/admin/doctors`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newDoctor),
@@ -79,7 +80,7 @@ const SuperAdminPanel = () => {
 
   const handleDeleteDoctor = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/doctors/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/admin/doctors/${id}`, {
         method: "DELETE",
       });
 
@@ -101,7 +102,7 @@ const SuperAdminPanel = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/users", {
+      const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -122,7 +123,7 @@ const SuperAdminPanel = () => {
 
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${id}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/admin/users/${id}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -140,7 +141,7 @@ const SuperAdminPanel = () => {
   };
   const handleDeleteUser = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/admin/users/${id}`, {
         method: "DELETE",
       });
 

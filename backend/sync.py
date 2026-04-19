@@ -29,4 +29,4 @@ async def sync_reports():
             
             logger.info("✅ Les rapports ont été synchronisés avec succès !")
 
-        await asyncio.sleep(10000)  # ⏳ Attendre 10 secondes avant de resynchroniser
+        await asyncio.sleep(10)  # ⏳ 10 secondes entre chaque synchronisation

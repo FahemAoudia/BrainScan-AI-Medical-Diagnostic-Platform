@@ -40,9 +40,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan) 
 
+_allowed = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
+_cors_origins = [o.strip() for o in _allowed.split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # ou ["*"] pour tout autoriser temporairement
+    allow_origins=_cors_origins,
+    allow_origin_regex=r"https://.*\.up\.railway\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -57,7 +58,7 @@ const [searchPatient, setSearchPatient] = useState(""); // ✅ Ajout du filtre p
                 return;
             }
 
-            const response = await fetch("http://localhost:5000/api/users/me", {
+            const response = await fetch(`${API_BASE_URL}/api/users/me`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
             });
@@ -80,7 +81,7 @@ const [searchPatient, setSearchPatient] = useState(""); // ✅ Ajout du filtre p
             console.log("📡 Fetching appointments...");
     
             const response = await fetch(
-                `http://localhost:5000/api/doctor_calendar/doctor/${doctorId}`
+                `${API_BASE_URL}/api/doctor_calendar/doctor/${doctorId}`
             );
     
             const data = await response.json();
@@ -134,7 +135,7 @@ const [searchPatient, setSearchPatient] = useState(""); // ✅ Ajout du filtre p
         formData.append("file", selectedFile);
     
         try {
-            const response = await fetch("http://localhost:5000/api/ai/predict", {
+            const response = await fetch(`${API_BASE_URL}/api/ai/predict`, {
                 method: "POST",
                 body: formData,
             });
@@ -165,7 +166,7 @@ const [searchPatient, setSearchPatient] = useState(""); // ✅ Ajout du filtre p
         };
     
         try {
-            const response = await fetch("http://localhost:5000/api/reports/mysql/generate", {
+            const response = await fetch(`${API_BASE_URL}/api/reports/mysql/generate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(reportData)
@@ -195,7 +196,7 @@ const downloadReport = (reportUrl, patientId) => {
     }
 
     // ✅ Corriger l'URL pour qu'il soit complet
-    const fullUrl = reportUrl.startsWith("http") ? reportUrl : `http://localhost:5000${reportUrl}`;
+    const fullUrl = reportUrl.startsWith("http") ? reportUrl : `${API_BASE_URL}${reportUrl}`;
 
     console.log("🔗 Ouverture du rapport dans une nouvelle fenêtre:", fullUrl);
 
@@ -222,7 +223,7 @@ const handleSetUnavailable = async () => {
 
     try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:5000/api/appointments/unavailable", {
+        const response = await fetch(`${API_BASE_URL}/api/appointments/unavailable`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -304,7 +305,7 @@ const handleSetUnavailable = async () => {
         }
     
         try {
-            const response = await fetch(`http://localhost:5000/api/reports/mysql/${patientId}`);
+            const response = await fetch(`${API_BASE_URL}/api/reports/mysql/${patientId}`);
             if (!response.ok) {
                 throw new Error("❌ Erreur lors de la récupération du rapport.");
             }
@@ -316,7 +317,7 @@ const handleSetUnavailable = async () => {
             }
     
             const link = document.createElement("a");
-            link.href = `http://localhost:5000/${data[0].report_url}`;
+            link.href = `${API_BASE_URL}/${data[0].report_url}`;
             link.setAttribute("download", `Rapport_Patient_${patientId}.pdf`);
             document.body.appendChild(link);
             link.click();
@@ -329,7 +330,7 @@ const handleSetUnavailable = async () => {
 
 const fetchPatientReports = async (patientId) => {
     try {
-        const response = await fetch(`http://localhost:5000/api/reports/mysql/${patientId}`);
+        const response = await fetch(`${API_BASE_URL}/api/reports/mysql/${patientId}`);
         if (response.ok) {
             const data = await response.json();
             setPatientReports(data);

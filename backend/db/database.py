@@ -5,6 +5,8 @@ from datetime import datetime
 from sqlalchemy.sql import text 
 from pymongo import MongoClient
 import logging
+import os
+from urllib.parse import quote_plus
 
 
 
@@ -13,13 +15,31 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-DATABASE_URL = "mysql+pymysql://root:rootpassword@mysql/brainscandb"
+def _env_strip(key, default):
+    """Railway / copier-coller ajoutent parfois \\n ou espaces en fin de ligne."""
+    v = os.getenv(key)
+    if v is None:
+        return default
+    s = v.strip()
+    return s if s else default
+
+
+_mysql_user = _env_strip("MYSQL_USER", "root")
+_mysql_password = _env_strip("MYSQL_PASSWORD", "rootpassword")
+_mysql_host = _env_strip("MYSQL_HOST", "mysql")
+_mysql_db = _env_strip("MYSQL_DB", "brainscandb")
+DATABASE_URL = (
+    f"mysql+pymysql://{quote_plus(_mysql_user)}:{quote_plus(_mysql_password)}"
+    f"@{_mysql_host}/{_mysql_db}"
+)
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-MONGO_URI = "mongodb+srv://aoudiafahem:azert123@aoudiafahem.jd0fc.mongodb.net/?retryWrites=true&w=majority&appName=aoudiafahem"
+_mongo_default = "mongodb://mongodb:27017/mydatabase"
+MONGO_URI = _env_strip("MONGO_URI", _mongo_default)
+_mongo_db_name = _env_strip("MONGO_DB_NAME", "brainscandb")
 client = MongoClient(MONGO_URI)
-mongo_db = client["brainscandb"]
+mongo_db = client[_mongo_db_name]
 
 
 # ✅ Création de la base de données

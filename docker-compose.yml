@@ -14,6 +14,7 @@ services:
       - MYSQL_PASSWORD=rootpassword
       - MYSQL_DB=brainscandb  # تأكد أن هذا الاسم يطابق MYSQL_DATABASE أدناه
       - MONGO_URI=mongodb://mongodb:27017/mydatabase
+      # - OPENAI_API_KEY=   # assistant chat — ajouter pour tester le chatbot en local
     networks:
       - mynetwork
 

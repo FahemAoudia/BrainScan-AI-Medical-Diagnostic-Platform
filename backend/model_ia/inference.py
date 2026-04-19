@@ -4,20 +4,26 @@ from tensorflow.keras.preprocessing import image
 import os
 from .utils import highlight_tumor  
 model_path = os.path.join(os.path.dirname(__file__), "model.h5")
-print(f"🔍 Chargement du modèle depuis : {model_path}")
 
-# Chargement du modèle
-model = tf.keras.models.load_model(model_path)
-print("✅ Modèle chargé avec succès")
+_model = None
+
+def _get_model():
+    """Charge le modèle au premier usage (évite OOM / timeout au démarrage sur Railway)."""
+    global _model
+    if _model is None:
+        print(f"🔍 Chargement du modèle depuis : {model_path}")
+        _model = tf.keras.models.load_model(model_path)
+        print("✅ Modèle chargé avec succès")
+    return _model
 
 
 class_labels = {0: "glioma", 1: "meningioma", 2: "notumor", 3: "pituitary"}
-print(f"✅ {class_labels}")
 
 def predict_tumor(image_path):
     if not os.path.exists(image_path):
         return {"error": "❌ "}
 
+    model = _get_model()
     img = image.load_img(image_path, target_size=(224, 224))
     img_array = image.img_to_array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
